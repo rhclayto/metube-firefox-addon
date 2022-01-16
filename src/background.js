@@ -58,7 +58,11 @@ async function sendToMeTube(itemUrl, quality, format) {
         await showError('MeTube instance url not configured. Go to about:addons to configure.');
     }
 
-    let url = new URL("add", meTubeUrl);
+    // Hacked by H.
+    // I have hacked MeTube to have a new endpoint, which gets the video from the URL passed in, but also grabs the title & description & forwards all that to a local MediaCMS instance for encoding & archiving.
+    // let url = new URL("add", meTubeUrl);
+    let url = new URL("addfull", meTubeUrl);
+    // End hacked by H.
     let xhr = new XMLHttpRequest();
     xhr.open("POST", url.toString());
     xhr.send(JSON.stringify({"url": itemUrl, "quality": quality, "format": format}));
